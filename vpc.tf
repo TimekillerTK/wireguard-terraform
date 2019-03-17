@@ -43,7 +43,7 @@ resource "aws_security_group" "vpc_default" {
     to_port   = 0
     protocol  = "-1"
 
-    cidr_blocks = ["${var.vpc_cidr_two_octets}.0.0/16", "${var.client_ip}"]
+    cidr_blocks = ["${var.vpc_cidr_two_octets}.0.0/16", "${var.client_pub_ip}"]
   }
 
   egress {

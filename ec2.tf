@@ -28,6 +28,11 @@ data "template_file" "vpn_user_data" {
   template = "${file("${path.module}/files/wireguard.sh")}"
 
   vars {
+    # broken server_ip (fix later) 
+    server_ip = "10.177.101.10"
+    allowed_ip = "${cidrhost(element(module.vpc.public_subnets_cidr_blocks, 0), 20)}/32"
+    client_pubkey = "${var.client_pub_key}"
+
     hostname    = "${var.namespace}-${var.environment}-ec2-instance"
     environment = "${var.environment}"
   }

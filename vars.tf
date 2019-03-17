@@ -15,7 +15,8 @@ variable "keypair_name" {
 
 ### IPs and EIPs
 
-variable "client_ip" {}
+variable client_pub_key {}
+variable "client_pub_ip" {}
 
 ### DNS and CERT
 
