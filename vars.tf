@@ -13,7 +13,10 @@ variable "keypair_name" {
   default     = "Neko-VPN"
 }
 
+### IPs and EIPs
+
 variable "client_ip" {}
+
 ### DNS and CERT
 
 variable "route53_hosted_zone" {
@@ -50,10 +53,13 @@ variable "vpc_cidr_two_octets" {
 ### EC2 ###
 # Note: If EC2 type is enabled, the agent role-policies might need to be enabled as well, see ecs.tf
 
+variable "instance_type" {
+  description = "Type of EC2 instance"
+  default     = "t2.micro"
+}
 
 variable "ami" {
   # eu-west-1: ubuntu AMI	ami-00035f41c82244dab
   description = "AMI to use, must fit region, by default we use latest ECS-Optimized AMI."
   default     = "ami-00035f41c82244dab"
 }
-

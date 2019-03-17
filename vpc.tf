@@ -7,16 +7,13 @@ module "vpc" {
 
   private_subnets = [
     "${var.vpc_cidr_two_octets}.1.0/24",
-    "${var.vpc_cidr_two_octets}.2.0/24",
   ]
 
   public_subnets = [
     "${var.vpc_cidr_two_octets}.101.0/24",
-    "${var.vpc_cidr_two_octets}.102.0/24",
   ]
 
-  enable_nat_gateway = true
-  single_nat_gateway = true
+  enable_nat_gateway = false
 
   # These tags apply to all resources
   tags {
@@ -62,4 +59,11 @@ resource "aws_security_group" "vpc_default" {
     "Environment" = "${var.environment}"
     "Name"        = "${var.namespace}-${var.environment}-vpc-default"
   }
+}
+
+resource "aws_eip" "vpn_instance_eip" {
+  vpc      = true
+  instance = "${aws_instance.vpn_instance.id}"
+
+  depends_on = ["module.vpc"]
 }
