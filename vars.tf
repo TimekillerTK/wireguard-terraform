@@ -13,6 +13,7 @@ variable "keypair_name" {
   default     = "Neko-VPN"
 }
 
+variable "client_ip" {}
 ### DNS and CERT
 
 variable "route53_hosted_zone" {
@@ -46,20 +47,9 @@ variable "vpc_cidr_two_octets" {
   default     = "10.177"
 }
 
-### ECS ###
+### EC2 ###
 # Note: If EC2 type is enabled, the agent role-policies might need to be enabled as well, see ecs.tf
 
-variable "ecs_public_instance_type" {
-  default = "t2.micro"
-}
-
-variable "ecs_public_min_size" {
-  default = "0"
-}
-
-variable "ecs_public_max_size" {
-  default = "0"
-}
 
 variable "ami" {
   # eu-west-1: ubuntu AMI	ami-00035f41c82244dab
@@ -67,31 +57,3 @@ variable "ami" {
   default     = "ami-00035f41c82244dab"
 }
 
-### ECS Task & Container ###
-
-variable "service" {
-  default = "servicename"
-}
-
-variable "app_port" {
-  description = "Container port for app."
-  default     = "serviceport"
-}
-
-variable "app_image" {
-  description = "Full name of the server image on ECR."
-  default     = "pathtoimage"
-}
-
-variable "app_desired_count" {
-  description = "The number of replicas app should run."
-  default     = "1"
-}
-
-variable "app_cpu" {
-  default = 2048
-}
-
-variable "app_memory" {
-  default = 10240
-}

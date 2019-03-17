@@ -46,9 +46,7 @@ resource "aws_security_group" "vpc_default" {
     to_port   = 0
     protocol  = "-1"
 
-    # Berlin HQ: 217.111.32.128/29
-    # Berlin HQ: 94.134.123.88/29
-    cidr_blocks = ["${var.vpc_cidr_two_octets}.0.0/16", "2.205.70.16/32"]
+    cidr_blocks = ["${var.vpc_cidr_two_octets}.0.0/16", "${var.client_ip}"]
   }
 
   egress {
