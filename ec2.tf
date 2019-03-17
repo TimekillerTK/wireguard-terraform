@@ -24,11 +24,22 @@ resource "aws_network_interface" "vpn_nw_int" {
   }
 }
 
+data "template_file" "vpn_user_data" {
+  template = "${file("${path.module}/files/wireguard.sh")}"
+
+  vars {
+    hostname    = "${var.namespace}-${var.environment}-ec2-instance"
+    environment = "${var.environment}"
+  }
+}
+
 resource "aws_instance" "vpn_instance" {
   ami               = "${var.ami}"
   instance_type     = "${var.instance_type}"
   availability_zone = "${element(var.vpc_azs, 0)}"
   key_name          = "${var.keypair_name}"
+
+   user_data = "${data.template_file.vpn_user_data.rendered}"
 
   root_block_device {
     volume_type           = "gp2"
