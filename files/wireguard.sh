@@ -1,18 +1,22 @@
 #!/bin/bash
+
 # logging function for debugging purposes
 exec 3>&1 4>&2
 trap 'exec 2>&4 1>&3' 0 1 2 3
 exec 1>script_tk.log 2>&1
 
-#elevate to root and create a new root directory called script
-sudo -i 
-mkdir /script && cd /script
+#elevate to root
+sudo -i
+whoami
+
+# Change directory to /etc/wireguard
+cd /etc/wireguard
+pwd
 
 # Get an apt update, add the wireguard ppa & install wireguard
 apt update -y && add-apt-repository -y ppa:wireguard/wireguard && apt -y install wireguard
 
 # Generate public and private keys
-# Currently creates the files in the root of / (???)
 wg genkey | tee privatekey | wg pubkey > publickey
 
 # variables
