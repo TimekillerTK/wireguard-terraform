@@ -9,12 +9,12 @@ exec 1>script_tk.log 2>&1
 sudo -i
 whoami
 
+# Get an apt update, add the wireguard ppa & install wireguard
+apt update -y && add-apt-repository -y ppa:wireguard/wireguard && apt -y install wireguard
+
 # Change directory to /etc/wireguard
 cd /etc/wireguard
 pwd
-
-# Get an apt update, add the wireguard ppa & install wireguard
-apt update -y && add-apt-repository -y ppa:wireguard/wireguard && apt -y install wireguard
 
 # Generate public and private keys
 wg genkey | tee privatekey | wg pubkey > publickey
