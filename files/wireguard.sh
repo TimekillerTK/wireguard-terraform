@@ -1,4 +1,8 @@
 #!/bin/bash
+# logging function for debugging purposes
+exec 3>&1 4>&2
+trap 'exec 2>&4 1>&3' 0 1 2 3
+exec 1>script_tk.log 2>&1
 
 #elevate to root and create a new root directory called script
 sudo -i 
