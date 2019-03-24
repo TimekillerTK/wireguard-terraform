@@ -1,9 +1,14 @@
 #!/bin/bash
 
+#elevate to root and create a new root directory called script
+sudo -i 
+mkdir /script && cd /script
+
 # Get an apt update, add the wireguard ppa & install wireguard
-sudo apt update -y && sudo add-apt-repository -y ppa:wireguard/wireguard && sudo apt -y install wireguard
+apt update -y && add-apt-repository -y ppa:wireguard/wireguard && apt -y install wireguard
 
 # Generate public and private keys
+# Currently creates the files in the root of / (???)
 wg genkey | tee privatekey | wg pubkey > publickey
 
 # variables
@@ -12,11 +17,11 @@ PRIVATE_KEY=$(cat privatekey)
 PUBLIC_KEY=$(cat publickey)
 
 # Enable server to forward IP traffic
-sudo sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
-sudo sysctl -w net.ipv4.ip_forward=1
+sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
+sysctl -w net.ipv4.ip_forward=1
 
 # Create wg0.conf file
-cat << EOF > ~/wg0.conf
+cat << EOF > wg0.conf
 [Interface]
 Adress = ${server_ip}
 PrivateKey = $PRIVATE_KEY
