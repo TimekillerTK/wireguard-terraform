@@ -31,7 +31,7 @@ sysctl -w net.ipv4.ip_forward=1
 # Create wg0.conf file
 cat << EOF > wg0.conf
 [Interface]
-Adress = ${server_ip}
+Address = ${server_ip}
 PrivateKey = $PRIVATE_KEY
 ListenPort = 51820
 PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
@@ -42,4 +42,5 @@ PublicKey = ${client_pubkey}
 AllowedIPs = ${allowed_ip}
 EOF
 
-#then copy files to /etc/wireguard/
+# Start wireguard to listen for a connection
+wg-quick up wg0
