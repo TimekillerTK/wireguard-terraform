@@ -66,6 +66,6 @@ resource "aws_instance" "vpn_instance" {
   
   # Running post-deploy script which pulls data from the instance
   provisioner "local-exec" {
-    command = "sleep 60 && scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@${aws_eip.vpn_instance_eip.public_ip}:/wg_client/wg0.conf ./files && sh ./files/post_deploy.sh"
+    command = "sleep 90 && scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@${aws_eip.vpn_instance_eip.public_ip}:/wg_client/wg0.conf ./files && sh ./files/post_deploy.sh"
   }
 }
