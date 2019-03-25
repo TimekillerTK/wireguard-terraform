@@ -37,7 +37,7 @@ data "template_file" "vpn_user_data" {
     hostname    = "${var.namespace}-${var.environment}-ec2-instance"
     environment = "${var.environment}"
 
-    depends_on = ["${aws_eip.vpn_instance_eip}"]
+    depends_on = ["${aws_eip.vpn_instance_eip.id}"]
   }
 }
 
