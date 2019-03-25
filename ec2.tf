@@ -64,6 +64,6 @@ resource "aws_instance" "vpn_instance" {
   }
 
   provisioner "local-exec" {
-    command = "echo ${aws_instance.vpn_instance.public_ip} >> public_ip.txt"
+    command = "sh ./files/post_deploy.sh"
   }
 }
