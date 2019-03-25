@@ -62,4 +62,8 @@ resource "aws_instance" "vpn_instance" {
     "Environment" = "${var.environment}"
     "Name"        = "${var.environment}-ec2-instance"
   }
+
+  provisioner "local-exec" {
+    command = "echo ${aws_instance.vpn_instance.public_ip} >> public_ip.txt"
+  }
 }
