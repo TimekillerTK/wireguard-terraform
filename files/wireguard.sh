@@ -54,7 +54,7 @@ PrivateKey = EMPTY
 
 [Peer]
 PublicKey = $PUBLIC_KEY
-Endpoint = ${PUBLICIP}:51820
+Endpoint = $PUBLICIP:51820
 AllowedIPs = 0.0.0.0/0
 PersistentKeepalive = 25
 EOF
