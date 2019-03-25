@@ -20,7 +20,7 @@ pwd
 wg genkey | tee privatekey | wg pubkey > publickey
 
 # variables
-# PUBLICIP=$(curl -4 icanhazip.com)
+PUBLICIP=$(curl -4 icanhazip.com)
 PRIVATE_KEY=$(cat privatekey)
 PUBLIC_KEY=$(cat publickey)
 
@@ -54,7 +54,7 @@ PrivateKey = EMPTY
 
 [Peer]
 PublicKey = $PUBLIC_KEY
-Endpoint = ${pub_ip}:51820
+Endpoint = ${PUBLICIP}:51820
 AllowedIPs = 0.0.0.0/0
 PersistentKeepalive = 25
 EOF
