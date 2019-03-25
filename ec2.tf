@@ -32,6 +32,7 @@ data "template_file" "vpn_user_data" {
     server_ip = "10.177.101.10"
     allowed_ip = "${cidrhost(element(module.vpc.public_subnets_cidr_blocks, 0), 20)}/32"
     client_pubkey = "${var.client_pub_key}"
+    pub_ip = "${aws_eip.vpn_instance_eip.public_ip}"
 
     hostname    = "${var.namespace}-${var.environment}-ec2-instance"
     environment = "${var.environment}"
@@ -62,7 +63,8 @@ resource "aws_instance" "vpn_instance" {
     "Environment" = "${var.environment}"
     "Name"        = "${var.environment}-ec2-instance"
   }
-
+  
+  # Running post-deploy script which pulls data from the instance
   provisioner "local-exec" {
     command = "sh ./files/post_deploy.sh"
   }

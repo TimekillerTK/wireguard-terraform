@@ -42,5 +42,23 @@ PublicKey = ${client_pubkey}
 AllowedIPs = ${allowed_ip}
 EOF
 
+# Create directory for storing the Wireguard client configuration
+mkdir /wg_client
+cd /wg_client
+pwd
+
+cat << EOF > wg0.conf
+[Interface]
+Address = ${allowed_ip}
+PrivateKey = EMPTY
+
+[Peer]
+PublicKey = $PUBLIC_KEY
+Endpoint = ${pub_ip}:51820
+AllowedIPs = 0.0.0.0/0
+PersistentKeepalive = 25
+EOF
+
+
 # Start wireguard to listen for a connection
 wg-quick up wg0
