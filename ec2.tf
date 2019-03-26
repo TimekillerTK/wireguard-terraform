@@ -35,6 +35,7 @@ data "template_file" "vpn_user_data" {
 
     hostname    = "${var.namespace}-${var.environment}-ec2-instance"
     environment = "${var.environment}"
+
   }
 }
 
@@ -61,5 +62,10 @@ resource "aws_instance" "vpn_instance" {
     "Terraform"   = "true"
     "Environment" = "${var.environment}"
     "Name"        = "${var.environment}-ec2-instance"
+  }
+  
+  # Running post-deploy script which pulls data from the instance
+  provisioner "local-exec" {
+    command = "sleep 90 && scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@${aws_eip.vpn_instance_eip.public_ip}:/wg_client/wg0.conf ./files && sh ./files/post_deploy.sh"
   }
 }

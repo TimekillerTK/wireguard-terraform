@@ -63,7 +63,7 @@ resource "aws_security_group" "vpc_default" {
 
 resource "aws_eip" "vpn_instance_eip" {
   vpc      = true
-  instance = "${aws_instance.vpn_instance.id}"
+  #instance = "${aws_instance.vpn_instance.id}"
 
   depends_on = ["module.vpc"]
 }
