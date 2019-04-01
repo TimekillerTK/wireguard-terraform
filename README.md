@@ -31,6 +31,9 @@ keypair_name = "NAME"
 * Add support for multiple regions (currently set up to `eu-west-1`)
 * Set output folder as variable with default set to `./output`
 * Update `README.md` to provide better step-by-step instructions
+* Harden linux VM, currently its only firewalled off
 
 #### Far future...
 * Add support for different cloud providers (Azure, GCP, Digital Ocean,etc)
+* Move to Alpine Linux VM for better performance & efficiency
+* 

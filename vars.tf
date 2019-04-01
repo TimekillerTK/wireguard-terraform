@@ -64,3 +64,8 @@ variable "ami" {
   description = "AMI to use, must fit region, by default we use latest ECS-Optimized AMI."
   default     = "ami-00035f41c82244dab"
 }
+
+variable "output_folder" {
+  description = "Folder which will output the wg0.conf file for use on the VPN client"
+  default = "./output"
+}
