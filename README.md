@@ -24,3 +24,13 @@ keypair_name = "NAME"
 3. Run `terraform init`, then `terraform apply` to create & bootstrap the AWS EC2 instance with Wireguard.
 4. Copy `./output/wg0.conf` to `/etc/wireguard` on your Wireguard client.
 5. Run `wg-quick up` to initiate the Wireguard VPN connection.
+
+***
+
+### **To Do**
+* Add support for multiple regions (currently set up to `eu-west-1`)
+* Set output folder as variable with default set to `./output`
+* Update `README.md` to provide better step-by-step instructions
+
+#### Far future...
+* Add support for different cloud providers (Azure, GCP, Digital Ocean,etc)
