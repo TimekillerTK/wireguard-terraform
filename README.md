@@ -29,7 +29,7 @@ keypair_name = "NAME"
 
 ### **To Do**
 * Add support for multiple regions (currently set up to `eu-west-1`)
-* Set output folder as variable with default set to `./output`
+* ~~Set output folder as variable with default set to `./output`~~ Added in `29c3049`
 * Update `README.md` to provide better step-by-step instructions
 * Harden linux VM, currently its only firewalled off
 
