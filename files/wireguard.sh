@@ -59,6 +59,5 @@ AllowedIPs = 0.0.0.0/0
 PersistentKeepalive = 25
 EOF
 
-
 # Start wireguard to listen for a connection
 wg-quick up wg0
