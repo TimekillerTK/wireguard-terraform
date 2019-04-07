@@ -21,9 +21,10 @@ keypair_name = "NAME"
    * `client_pub_key` - insert public key generated with Wireguard. This command `wg genkey | tee privatekey | wg pubkey > publickey` will export both public and private keys 
    * `client_pub_ip` - go to https://www.whatsmyip.org or `curl -4 icanhazip.com` to get your client's public IP. Use CDIR notation `xxx.xxx.xxx.xxx/32`
    * `keypair_name` - name of the Keypair added to AWS
-3. Run `terraform init`, then `terraform apply` to create & bootstrap the AWS EC2 instance with Wireguard.
-4. Copy `./output/wg0.conf` to `/etc/wireguard` on your Wireguard client.
-5. Run `wg-quick up` to initiate the Wireguard VPN connection.
+3. Run `terraform init`, 
+4. Run `run_script.sh` and type Yes when prompted. 
+5. Copy `./output/wg0.conf` to `/etc/wireguard` on your Wireguard client.
+6. Run `wg-quick up` to initiate the Wireguard VPN connection.
 
 ***
 

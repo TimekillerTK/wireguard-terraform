@@ -65,7 +65,8 @@ resource "aws_instance" "vpn_instance" {
   }
   
   # Running post-deploy script which pulls data from the instance
-  provisioner "local-exec" {
-    command = "sleep 90 && sh ./files/post_deploy.sh"
-  }
+  # Old and deprecated, this code will be run in run_script.sh instead
+  #provisioner "local-exec" {
+  #  command = "sleep 90 && sh ./files/post_deploy.sh"
+  #}
 }
