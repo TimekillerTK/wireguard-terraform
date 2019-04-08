@@ -9,4 +9,7 @@ scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@$ELASTICI
 PRIVKEY=$(cat ./input/privatekey)
 
 # modify the wg0.conf file
-sed -i -e "s/EMPTY/$PRIVKEY/g" $OUTPUTFOLDER/wg0.conf
+sed -i -e 's#EMPTY#'$PRIVKEY'#g' $OUTPUTFOLDER/wg0.conf
+
+# New Method 's#EMPTY#'$PRIVKEY'#g'
+# Previous Broken Method: "s/EMPTY/$PRIVKEY/g"
