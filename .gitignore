@@ -7,3 +7,11 @@
 
 # .tfvars files
 *.tfvars
+
+# all files in output, output & logs folders except .gitkeep
+logs/*
+!logs/.gitkeep
+output/*
+!output/.gitkeep
+input/*
+!input/.gitkeep

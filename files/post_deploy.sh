@@ -1,14 +1,15 @@
 #!/bin/bash
 
-# Logging function
-exec 3>&1 4>&2
-trap 'exec 2>&4 1>&3' 0 1 2 3
-exec 1>./script_tk.log 2>&1
+ELASTICIP=$(terraform output eip)
+OUTPUTFOLDER=$(terraform output out_folder)
 
-pwd
+scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@$ELASTICIP:/wg_client/wg0.conf $OUTPUTFOLDER/wg0.conf
 
 # Get client private key and store it in a variable
-PRIVKEY=$(cat ~/privatekey)
+PRIVKEY=$(cat ./input/privatekey)
 
 # modify the wg0.conf file
-sed -i -e "s/EMPTY/$PRIVKEY/g" ./files/wg0.conf
+sed -i -e 's#EMPTY#'$PRIVKEY'#g' $OUTPUTFOLDER/wg0.conf
+
+# New Method 's#EMPTY#'$PRIVKEY'#g'
+# Previous Broken Method: "s/EMPTY/$PRIVKEY/g"

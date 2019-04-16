@@ -15,7 +15,7 @@ variable "keypair_name" {
 
 ### IPs and EIPs
 
-variable client_pub_key {}
+variable "client_pub_key" {}
 variable "client_pub_ip" {}
 
 ### DNS and CERT
@@ -63,4 +63,9 @@ variable "ami" {
   # eu-west-1: ubuntu AMI	ami-00035f41c82244dab
   description = "AMI to use, must fit region, by default we use latest ECS-Optimized AMI."
   default     = "ami-00035f41c82244dab"
+}
+
+variable "output_folder" {
+  description = "Folder which will output the wg0.conf file for use on the VPN client"
+  default = "./output"
 }
