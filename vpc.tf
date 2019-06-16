@@ -3,7 +3,7 @@ module "vpc" {
 
   name = "${var.namespace}-${var.environment}"
   cidr = "${var.vpc_cidr_two_octets}.0.0/16"
-  azs  = "${var.vpc_azs}"
+  azs  = var.vpc_azs
 
   private_subnets = [
     "${var.vpc_cidr_two_octets}.1.0/24",
@@ -16,16 +16,16 @@ module "vpc" {
   enable_nat_gateway = false
 
   # These tags apply to all resources
-  tags {
+  tags = {
     "Terraform"   = "true"
-    "Environment" = "${var.environment}"
+    "Environment" = var.environment
   }
 }
 
 resource "aws_security_group" "vpc_default" {
   name        = "${var.namespace}-${var.environment}-vpc-default"
   description = "Public traffic for VPN"
-  vpc_id      = "${module.vpc.vpc_id}"
+  vpc_id      = module.vpc.vpc_id
 
   lifecycle {
     create_before_destroy = true
@@ -43,7 +43,7 @@ resource "aws_security_group" "vpc_default" {
     to_port   = 0
     protocol  = "-1"
 
-    cidr_blocks = ["${var.vpc_cidr_two_octets}.0.0/16", "${var.client_pub_ip}"]
+    cidr_blocks = ["${var.vpc_cidr_two_octets}.0.0/16", var.client_pub_ip]
   }
 
   egress {
@@ -54,16 +54,18 @@ resource "aws_security_group" "vpc_default" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags {
+  tags = {
     "Terraform"   = "true"
-    "Environment" = "${var.environment}"
+    "Environment" = var.environment
     "Name"        = "${var.namespace}-${var.environment}-vpc-default"
   }
 }
 
 resource "aws_eip" "vpn_instance_eip" {
-  vpc      = true
+  vpc = true
+
   #instance = "${aws_instance.vpn_instance.id}"
 
-  depends_on = ["module.vpc"]
+  depends_on = [module.vpc]
 }
+

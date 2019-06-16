@@ -1,5 +1,6 @@
 provider "aws" {
-  version = "~> 1.58"
+  version = "~> 2.7"
   profile = "neko-vpn"
   region  = "eu-west-1"
 }
+

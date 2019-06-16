@@ -15,8 +15,11 @@ variable "keypair_name" {
 
 ### IPs and EIPs
 
-variable "client_pub_key" {}
-variable "client_pub_ip" {}
+variable "client_pub_key" {
+}
+
+variable "client_pub_ip" {
+}
 
 ### DNS and CERT
 
@@ -41,7 +44,7 @@ variable "region" {
 }
 
 variable "vpc_azs" {
-  type        = "list"
+  type        = list(string)
   description = "List of AZs for the VPC, must match region."
   default     = ["eu-west-1a", "eu-west-1b"]
 }
@@ -67,5 +70,6 @@ variable "ami" {
 
 variable "output_folder" {
   description = "Folder which will output the wg0.conf file for use on the VPN client"
-  default = "./output"
+  default     = "./output"
 }
+
