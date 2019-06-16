@@ -6,4 +6,3 @@ output "eip" {
 output "out_folder" {
   value = var.output_folder
 }
-

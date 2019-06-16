@@ -67,4 +67,3 @@ resource "aws_instance" "vpn_instance" {
   #  command = "sleep 90 && sh ./files/post_deploy.sh"
   #}
 }
-
